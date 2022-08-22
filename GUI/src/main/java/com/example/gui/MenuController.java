@@ -1,14 +1,19 @@
 package com.example.gui;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class MenuController {
     @FXML
-    TableColumn col;
+    private TableView<Data> table;
+    @FXML
+    private TableColumn<Data, String> inputs;
 
     @FXML
     ToolBar tool;
@@ -18,9 +23,15 @@ public class MenuController {
     Button buttonThree;
     @FXML
     Button buttonCustom;
-
+    ObservableList<Data> list = FXCollections.observableArrayList(
+            new Data ("one"),
+            new Data ("two"),
+            new Data ("three")
+    );
     @FXML
-    void initialize(){
+    public void initialize(){
         
+        inputs.setCellValueFactory(new PropertyValueFactory<Data,String>("inputs"));
+        table.setItems(list);
     }
 }

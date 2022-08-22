@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.MenuController">
    <children>
       <Label alignment="CENTER" layoutX="63.0" layoutY="37.0" prefHeight="50.0" prefWidth="470.0" text="Show data in custom column wise." textAlignment="CENTER">
@@ -16,9 +15,9 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TableView layoutX="149.0" layoutY="94.0" prefHeight="170.0" prefWidth="299.0">
+      <TableView fx:id="table" layoutX="149.0" layoutY="94.0" prefHeight="182.0" prefWidth="302.0">
         <columns>
-          <TableColumn minWidth="0.0" prefWidth="300.0" text="C1" />
+          <TableColumn fx:id="inputs" minWidth="0.0" prefWidth="298.4000274658203" text="inputs" />
         </columns>
       </TableView>
       <Label layoutX="94.0" layoutY="303.0" prefHeight="50.0" prefWidth="149.0" text="Number of Columns:">
@@ -26,11 +25,11 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <ToolBar layoutX="244.0" layoutY="303.0" prefHeight="40.0" prefWidth="200.0">
+      <ToolBar fx:id="tool" layoutX="244.0" layoutY="303.0" prefHeight="40.0" prefWidth="200.0">
         <items>
-          <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="56.0" text="2" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="3" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="67.0" text="Custom" />
+          <Button fx:id="buttonTwo" mnemonicParsing="false" prefHeight="26.0" prefWidth="56.0" text="2" />
+            <Button fx:id="buttonThree" mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="3" />
+            <Button fx:id="buttonCustom" mnemonicParsing="false" prefHeight="26.0" prefWidth="67.0" text="Custom" />
         </items>
       </ToolBar>
    </children>
