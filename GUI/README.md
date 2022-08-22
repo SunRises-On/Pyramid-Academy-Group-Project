@@ -3,4 +3,4 @@ ________________________________________________________________________________
 
 Run Configuration is  program from com.example.gui.Controller.Main.
 
-## Game Screens
+## GUI Screens
