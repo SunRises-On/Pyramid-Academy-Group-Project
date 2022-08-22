@@ -1,4 +1,4 @@
-package com.example.gui;
+package com.example.gui.Controller;
 
 public class Data {
     private String inputs;
@@ -11,5 +11,9 @@ public class Data {
     }
     public void setInputs(String s){
         this.inputs = s;
+    }
+    @Override
+    public String toString(){
+        return inputs;
     }
 }

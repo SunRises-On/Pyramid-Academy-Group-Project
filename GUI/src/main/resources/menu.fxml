@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.MenuController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.Controller.MenuController">
    <children>
       <Label alignment="CENTER" layoutX="63.0" layoutY="37.0" prefHeight="50.0" prefWidth="470.0" text="Show data in custom column wise." textAlignment="CENTER">
          <font>
@@ -27,9 +27,9 @@
       </Label>
       <ToolBar fx:id="tool" layoutX="244.0" layoutY="303.0" prefHeight="40.0" prefWidth="200.0">
         <items>
-          <Button fx:id="buttonTwo" mnemonicParsing="false" prefHeight="26.0" prefWidth="56.0" text="2" />
-            <Button fx:id="buttonThree" mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="3" />
-            <Button fx:id="buttonCustom" mnemonicParsing="false" prefHeight="26.0" prefWidth="67.0" text="Custom" />
+          <Button fx:id="buttonTwo" mnemonicParsing="false" onAction="#clickButtonTwo" prefHeight="26.0" prefWidth="56.0" text="2" />
+            <Button fx:id="buttonThree" mnemonicParsing="false" onAction="#clickButtonThree" prefHeight="26.0" prefWidth="54.0" text="3" />
+            <Button fx:id="buttonCustom" mnemonicParsing="false" onAction="#clickButtonCustom" prefHeight="26.0" prefWidth="67.0" text="Custom" />
         </items>
       </ToolBar>
    </children>
