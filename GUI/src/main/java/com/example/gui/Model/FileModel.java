@@ -12,7 +12,9 @@ public class FileModel {
         handle = new FileHandlerMain();
     }
     public ArrayList<String> getListInit(){
-        return handle.getDataInit().stream().collect(Collectors
-                .toCollection(ArrayList::new));
+        return handle.getDataInit().stream().collect(Collectors.toCollection(ArrayList::new));
+    }
+    public ArrayList<String> getListFormat(int colNum){
+        return handle.getFormattedList(colNum).stream().collect(Collectors.toCollection(ArrayList::new));
     }
 }

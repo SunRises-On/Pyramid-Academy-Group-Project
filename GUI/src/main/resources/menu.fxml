@@ -20,16 +20,16 @@
           <TableColumn fx:id="inputs" minWidth="0.0" prefWidth="298.4000274658203" text="inputs" />
         </columns>
       </TableView>
-      <Label layoutX="94.0" layoutY="303.0" prefHeight="50.0" prefWidth="149.0" text="Number of Columns:">
+      <Label layoutX="94.0" layoutY="303.0" prefHeight="40.0" prefWidth="152.0" text="Number of Columns:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <ToolBar fx:id="tool" layoutX="244.0" layoutY="303.0" prefHeight="40.0" prefWidth="200.0">
+      <ToolBar fx:id="tool" layoutX="244.0" layoutY="303.0" prefHeight="40.0" prefWidth="223.0">
         <items>
-          <Button fx:id="buttonTwo" mnemonicParsing="false" onAction="#clickButtonTwo" prefHeight="26.0" prefWidth="56.0" text="2" />
-            <Button fx:id="buttonThree" mnemonicParsing="false" onAction="#clickButtonThree" prefHeight="26.0" prefWidth="54.0" text="3" />
-            <Button fx:id="buttonCustom" mnemonicParsing="false" onAction="#clickButtonCustom" prefHeight="26.0" prefWidth="67.0" text="Custom" />
+          <Button fx:id="buttonTwo" mnemonicParsing="false" onAction="#clickButtonTwo" prefHeight="25.0" prefWidth="60.0" text="2" />
+            <Button fx:id="buttonThree" mnemonicParsing="false" onAction="#clickButtonThree" prefHeight="25.0" prefWidth="60.0" text="3" />
+            <Button fx:id="buttonCustom" mnemonicParsing="false" onAction="#clickButtonCustom" prefHeight="25.0" prefWidth="60.0" text="Custom" />
         </items>
       </ToolBar>
    </children>

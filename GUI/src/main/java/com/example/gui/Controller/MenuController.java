@@ -1,19 +1,24 @@
 package com.example.gui.Controller;
 
-import com.example.gui.Controller.Data;
+
 import com.example.gui.Model.FileModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class MenuController {
+
     FileModel model;
     @FXML
     private TableView<Data> table;
@@ -28,33 +33,37 @@ public class MenuController {
     Button buttonThree;
     @FXML
     Button buttonCustom;
-    ObservableList<Data> list = FXCollections.observableArrayList(
-            new Data ("one"),
-            new Data ("two"),
-            new Data ("three")
-    );
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
     @FXML
     public void initialize(){
 
         model = new FileModel();
-
         ArrayList<String> listInit = model.getListInit();
-        
-        ArrayList<Data> dataArrayList = listInit.stream().map(Data::new).collect(Collectors.toCollection(ArrayList::new));
         //dataArrayList.forEach(System.out::println);
-        ObservableList<Data> list = FXCollections.observableArrayList(dataArrayList);
+        ObservableList<Data> list = getObservable(listInit);
 
-        inputs.setCellValueFactory(new PropertyValueFactory<Data,String>("inputs"));
+        inputs.setCellValueFactory(new PropertyValueFactory<>("inputs"));
         table.setItems(list);
+        inputs.setSortable(false); /* Disable Column sorting */
+
+
     }
     @FXML
     public void clickButtonTwo( ActionEvent event)throws IOException{
         System.out.println("Clicked button Two");
+        ArrayList<String> listForm = model.getListFormat(2);
+        ObservableList<Data> observableList = getObservable(listForm);
+        switchScene(2, observableList, event);
     }
     @FXML
     public void clickButtonThree( ActionEvent event) throws IOException{
         System.out.println("Clicked button Three");
-
+        ArrayList<String> listForm = model.getListFormat(3);
+        ObservableList<Data> observableList = getObservable(listForm);
+        switchScene(3, observableList, event);
     }
 
     /*****************************************************************
@@ -63,5 +72,28 @@ public class MenuController {
     @FXML
     public void clickButtonCustom( ActionEvent event)throws  IOException{
 
+    }
+
+    public void switchScene(int num,ObservableList<Data> list , ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sceneTwo.fxml"));
+        root = loader.load();
+
+
+        SceneTwoController controller = loader.getController();
+        controller.setObservableList(list);
+        controller.setColumnNum( num);
+        controller.initialize();
+
+
+        stage = (Stage)((javafx.scene.Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public ObservableList<Data> getObservable (ArrayList<String> list){
+
+        ArrayList<Data> dataArrayList = list.stream().map(Data::new).collect(Collectors.toCollection(ArrayList::new));
+       return FXCollections.observableArrayList(dataArrayList);
     }
 }
