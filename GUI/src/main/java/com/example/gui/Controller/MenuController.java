@@ -133,6 +133,10 @@ public class MenuController {
 
         stage = (Stage) anchorPane.getScene().getWindow();
 
+
+        int len =  list.get(0).toString().length();
+
+        controller.setNumberSpaces(len);
         controller.setObservableList(list);
         controller.setColumnNum( num);
         controller.initialize();
