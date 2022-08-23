@@ -32,7 +32,7 @@ public class SceneTwoController {
                     public void updateItem(String item, boolean empty){
                         //super.updateItem(item, empty);
                         super.updateItem(item, empty);
-                        setFont(Font.font("Consolas", 16));
+                        setFont(Font.font("Consolas", 14));
                         setText(item);
 
                     }
