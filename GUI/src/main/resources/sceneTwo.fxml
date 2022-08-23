@@ -5,11 +5,15 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import java.net.URL?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.Controller.SceneTwoController">
-   <children>
+    <stylesheets>
+        <URL value="@textfonts.css"/>
+    </stylesheets>
+    <children>
       <TableView fx:id="table" layoutX="74.0" layoutY="92.0" prefHeight="258.0" prefWidth="463.0">
         <columns>
-          <TableColumn fx:id="inputs" prefWidth="458.40000915527344" />
+          <TableColumn fx:id="inputs" prefWidth="458.40000915527344" styleClass="mono"/>
         </columns>
       </TableView>
       <Label layoutX="196.0" layoutY="35.0" prefHeight="30.0" prefWidth="214.0" />
