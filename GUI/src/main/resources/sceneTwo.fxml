@@ -7,19 +7,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.Controller.SceneTwoController">
+<AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.Controller.SceneTwoController">
 
     <children>
-      <TableView fx:id="table" layoutX="68.0" layoutY="99.0" prefHeight="225.0" prefWidth="458.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="80.0">
+      <TableView fx:id="table" layoutX="100.0" layoutY="80.0" prefHeight="240.0" AnchorPane.topAnchor="80.0">
         <columns>
-          <TableColumn fx:id="inputs" minWidth="3.9999656677246094" prefWidth="500.0" />
+          <TableColumn fx:id="inputs" minWidth="3.9999656677246094" />
         </columns>
       </TableView>
       <Label fx:id="label" alignment="CENTER" layoutX="138.0" layoutY="33.0" prefHeight="46.0" prefWidth="338.0" text="Header" textAlignment="CENTER" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="25.0">
          <font>
             <Font name="Consolas" size="24.0" />
          </font></Label>
-      <Button layoutX="164.0" layoutY="346.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" text="&lt;--" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="100.0" />
+      <Button fx:id="buttonBack" layoutX="164.0" layoutY="346.0" mnemonicParsing="false" onAction="#clickButtonBack" prefHeight="26.0" prefWidth="87.0" text="&lt;--" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="100.0" />
       <Button layoutX="405.0" layoutY="346.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Export" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="100.0" />
    </children>
 </AnchorPane>

@@ -56,7 +56,6 @@ public class MenuController {
 
         inputs.setCellValueFactory(new PropertyValueFactory<>("inputs"));
 
-
         inputs.setCellFactory(new Callback<TableColumn<Data, String>, TableCell<Data, String>>() {
             @Override
             public TableCell<Data, String> call(TableColumn<Data, String> param) {
@@ -81,7 +80,6 @@ public class MenuController {
          * ***********************************************************************/
          td = new TextInputDialog("");
         td.setHeaderText("Enter the number of columns.");
-       // Button okButton = (Button) td.getDialogPane().lookupButton(ButtonType.OK);
         inputField = td.getEditor();
 
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
@@ -110,7 +108,6 @@ public class MenuController {
     public void clickButtonTwo( ActionEvent event)throws IOException{
         ArrayList<String> listForm = model.getListFormat(2);
         ObservableList<Data> observableList = getObservable(listForm);
-        //observableList.forEach(System.out::println);
         switchScene(2, observableList, event);
     }
     @FXML
@@ -182,5 +179,8 @@ public class MenuController {
     public void customSwitchEvent(ObservableList<Data> list ) throws IOException {
 
         switchScene(numCol, list, new ActionEvent());
+    }
+    public void printObservableDataList(ObservableList<Data> observableList){
+        observableList.forEach(System.out::println);
     }
 }

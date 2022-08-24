@@ -1,20 +1,33 @@
 package com.example.gui.Controller;
 
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 // implement a minimum size for column text width()!!!
 //set that in autoResizeColumns
 public class SceneTwoController {
+    @FXML
+    private AnchorPane pane;
+    @FXML
+    private Button buttonBack;
     @FXML
     private Label label;
     @FXML
@@ -26,7 +39,11 @@ public class SceneTwoController {
     private static String font = "Consolas";
     private static int fontSize = 14;
     private static int numItems;
+    private static double maxColumnWidth;
     private ObservableList<Data> dataList;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     @FXML
     public void initialize(){
@@ -41,8 +58,7 @@ public class SceneTwoController {
         inputs.setCellFactory(new Callback<TableColumn<Data, String>, TableCell<Data, String>>() {
             @Override
             public TableCell<Data, String> call(TableColumn<Data, String> param) {
-                //TableCell<Data, String> cell = new TableCell<>();
-                // cell.setTextOverrun( OverrunStyle.valueOf());
+
                 return new TableCell<Data, String>(){
                     @Override
                     public void updateItem(String item, boolean empty){
@@ -61,20 +77,35 @@ public class SceneTwoController {
         });
 
         table.setItems(dataList);
-        
-        table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+
         inputs.setSortable(false); /* Disable Column sorting */
 
 
     }
+
+    @FXML
+    public void clickButtonBack(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/menu.fxml"));
+        root = loader.load();
+
+        stage = (Stage)((javafx.scene.Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void setObservableList( ObservableList<Data> list){
 
         this.dataList = list;
         initialize();
         numItems = list.size();
+        createListener();
         autoResizeColumns(table);
 
+
     }
+
 
     public void setColumnNum(int num ){
         this.colNum = num;
@@ -110,6 +141,30 @@ public class SceneTwoController {
             }
             //set the new max-widht with some extra space
             column.setPrefWidth( max + 10.0d );
+            maxColumnWidth = max+10.d;
         } );
     }
+
+    /**************************************************************************************************
+     * Create listener for AnchorPanel height and width, so that when the window is resized. The
+     * max Table Height and width changes too.
+     **/
+
+    public void createListener(){
+        InvalidationListener listener = new InvalidationListener(){
+            @Override
+            public void invalidated(Observable o){
+                double paneWN = pane.getWidth();
+                double paneHN = pane.getHeight();
+                table.setMaxSize(paneWN-200, paneHN-160);
+            }
+        };
+        pane.widthProperty().addListener(listener);
+        pane.heightProperty().addListener(listener);
+    }
+
+
+
 }
+
+
