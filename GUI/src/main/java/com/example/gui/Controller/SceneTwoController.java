@@ -12,7 +12,11 @@ import javafx.util.Callback;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+// implement a minimum size for column text width()!!!
+//set that in autoResizeColumns
 public class SceneTwoController {
+    @FXML
+    private Label label;
     @FXML
     private TableView<Data> table;
     @FXML
@@ -26,7 +30,7 @@ public class SceneTwoController {
     public void initialize(){
         String header= "Output for Input with "+ colNum + " columns";
 
-        inputs.setText(header);
+        label.setText(header);
         table.setItems(dataList);
 
 
@@ -59,12 +63,13 @@ public class SceneTwoController {
         table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
         inputs.setSortable(false); /* Disable Column sorting */
 
+
     }
     public void setObservableList( ObservableList<Data> list){
 
         this.dataList = list;
         initialize();
-        numItems = list.size()-1;
+        numItems = list.size();
         autoResizeColumns(table);
 
     }
@@ -83,7 +88,7 @@ public class SceneTwoController {
             Text text = new Text( column.getText() );
             double max = text.getLayoutBounds().getWidth();
             System.out.println("max width of text = "+max);
-            for ( int i = 0; i < numItems; i++ )
+            for ( int i = 0; i <= numItems-1; i++ )
             {
                 //cell must not be empty
                 if ( column.getCellData( i ) != null )

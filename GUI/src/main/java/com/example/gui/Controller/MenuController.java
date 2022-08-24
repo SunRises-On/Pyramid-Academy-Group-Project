@@ -56,6 +56,7 @@ public class MenuController {
 
         inputs.setCellValueFactory(new PropertyValueFactory<>("inputs"));
 
+
         inputs.setCellFactory(new Callback<TableColumn<Data, String>, TableCell<Data, String>>() {
             @Override
             public TableCell<Data, String> call(TableColumn<Data, String> param) {
@@ -151,6 +152,9 @@ public class MenuController {
         ArrayList<Data> dataArrayList = list.stream().map(Data::new).collect(Collectors.toCollection(ArrayList::new));
        return FXCollections.observableArrayList(dataArrayList);
     }
+    //add no negative number
+    // add no adding more columns than length of observable list
+    // add no add more columns than size of int
     public boolean isValid(String s){
         System.out.println("in isValid");
         System.out.println(s);
@@ -163,14 +167,14 @@ public class MenuController {
                 numCol = num;
                 System.out.println("numCol = " + numCol);
             } catch (NumberFormatException e) {
-                setAlert();
+                setAlertLetters();
                 inputField.setText("");
                 return false;
             }
         }
         return true;
     }
-    public void setAlert(){
+    public void setAlertLetters(){
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setContentText("Enter Only Numbers");
         a.show();
