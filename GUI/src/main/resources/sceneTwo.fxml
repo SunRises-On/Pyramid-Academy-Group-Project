@@ -15,11 +15,11 @@
           <TableColumn fx:id="inputs" minWidth="3.9999656677246094" prefWidth="500.0" />
         </columns>
       </TableView>
-      <Label fx:id="label" alignment="CENTER" layoutX="138.0" layoutY="33.0" prefHeight="46.0" prefWidth="338.0" text="Header" textAlignment="CENTER" AnchorPane.bottomAnchor="330.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="25.0">
+      <Label fx:id="label" alignment="CENTER" layoutX="138.0" layoutY="33.0" prefHeight="46.0" prefWidth="338.0" text="Header" textAlignment="CENTER" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="25.0">
          <font>
             <Font name="Consolas" size="24.0" />
          </font></Label>
-      <Button layoutX="112.0" layoutY="348.0" mnemonicParsing="false" text="&lt;--" />
-      <Button layoutX="454.0" layoutY="348.0" mnemonicParsing="false" text="Export" />
+      <Button layoutX="164.0" layoutY="346.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" text="&lt;--" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="100.0" />
+      <Button layoutX="405.0" layoutY="346.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Export" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="100.0" />
    </children>
 </AnchorPane>

@@ -23,6 +23,8 @@ public class SceneTwoController {
     private TableColumn<Data, String> inputs;
     private int colNum;
     private int numberSpaces;
+    private static String font = "Consolas";
+    private static int fontSize = 14;
     private static int numItems;
     private ObservableList<Data> dataList;
 
@@ -49,7 +51,7 @@ public class SceneTwoController {
                             setText(null);
                         } else {
                             super.updateItem(item, empty);
-                            setFont(Font.font("Consolas", 14));
+                            setFont(Font.font(font, fontSize));
                         }
                             setText(item);
 
@@ -59,7 +61,7 @@ public class SceneTwoController {
         });
 
         table.setItems(dataList);
-
+        
         table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
         inputs.setSortable(false); /* Disable Column sorting */
 
@@ -94,7 +96,7 @@ public class SceneTwoController {
                 if ( column.getCellData( i ) != null )
                 {
                     text = new Text( column.getCellData( i ).toString());
-                    text.setFont(Font.font("Consolas",14));
+                    text.setFont(Font.font(font,fontSize));
                     System.out.println("hello in autoresize");
                     System.out.println(text.toString());;
                     double calcWidth = text.getLayoutBounds().getWidth();
