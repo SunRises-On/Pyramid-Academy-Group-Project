@@ -1,8 +1,8 @@
 package com.example.gui.File;
-//By DrewTodd0628
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+//By DrewTodd0628
+
 
 class FileInputHandlerTest {
 

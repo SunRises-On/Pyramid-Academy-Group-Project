@@ -1,5 +1,6 @@
 module com.example.gui {
     requires javafx.controls;
+    requires javafx.media;
     requires javafx.fxml;
 
 

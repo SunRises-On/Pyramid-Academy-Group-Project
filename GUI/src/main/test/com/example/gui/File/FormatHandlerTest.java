@@ -2,10 +2,8 @@ package com.example.gui.File;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 //By DrewTodd0628
 class FormatHandlerTest {
 

@@ -46,7 +46,7 @@ public class MenuController {
     AnchorPane anchorPane;
     @FXML
     public void initialize(){
-
+        buttonTwo.setId("buttonTwo");
         model = new FileModel();
         ArrayList<String> listInit = model.getListInit();
         ObservableList<Data> list = getObservable(listInit);
