@@ -108,15 +108,23 @@ public class MenuController {
     }
     @FXML
     public void clickButtonTwo()throws IOException{
+        int colNum = 2;
         ArrayList<String> listForm = model.getListFormat(2);
+        if(listForm.isEmpty()){
+            colNum = 0;
+        }
         ObservableList<Data> observableList = getObservable(listForm);
-        switchScene(2, observableList);
+        switchScene(colNum, observableList);
     }
     @FXML
     public void clickButtonThree() throws IOException{
-        ArrayList<String> listForm = model.getListFormat(3);
+        int colNum = 3;
+        ArrayList<String> listForm = model.getListFormat(colNum);
+        if(listForm.isEmpty()){
+            colNum = 0;
+        }
         ObservableList<Data> observableList = getObservable(listForm);
-        switchScene(3, observableList);
+        switchScene(colNum, observableList);
     }
 
 
