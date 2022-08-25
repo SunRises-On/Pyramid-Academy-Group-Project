@@ -3,7 +3,6 @@ package com.example.gui.Controller;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,18 +12,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.stream.Collectors;
 
-// implement a minimum size for column text width()!!!
-//set that in autoResizeColumns
+
 public class SceneTwoController {
     @FXML
     private AnchorPane pane;
@@ -37,23 +31,16 @@ public class SceneTwoController {
     @FXML
     private TableColumn<Data, String> inputs;
     private int colNum;
-    private static String font = "Consolas";
-    private static int fontSize = 14;
+    private static final String font = "Consolas";
+    private static final int fontSize = 14;
     private static int numItems;
-    private static double columnHeight;
     private static double maxColumnWidth;
     private ObservableList<Data> dataList;
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
     @FXML
     public void initialize(){
-        String header= "Output for Input with "+ colNum + " columns";
 
-        label.setText(header);
-        table.setItems(dataList);
-
+        setLabelHeader();
 
         inputs.setCellValueFactory(new PropertyValueFactory<>("inputs"));
 
@@ -65,7 +52,7 @@ public class SceneTwoController {
 
                     @Override
                     public void updateItem(String item, boolean empty){
-                        //super.updateItem(item, empty);
+
                         if(item == null || empty){
                             setText(null);
                         } else {
@@ -83,12 +70,13 @@ public class SceneTwoController {
 
         inputs.setSortable(false); /* Disable Column sorting */
 
-         //   inputs.prefWidthProperty().bind(table.widthProperty());
     }
 
     @FXML
     public void clickButtonBack(ActionEvent event) throws IOException {
-
+        Stage stage;
+        Scene scene;
+        Parent root;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/menu.fxml"));
         root = loader.load();
 
@@ -113,6 +101,11 @@ public class SceneTwoController {
         this.colNum = num;
     }
 
+    /*********************************************************************************
+     * Set maximum width for the column text. Prevent text cut off.
+     * @param table = tableView
+     ********************************************************************************/
+
     public static void autoResizeColumns( TableView<?> table )
     {
         //Set the right policy
@@ -122,7 +115,6 @@ public class SceneTwoController {
             //Minimal width = columnheader
             Text text = new Text( column.getText() );
             double max = text.getLayoutBounds().getWidth();
-            System.out.println("max width of text = "+max);
 
             for ( int i = 0; i <= numItems-1; i++ )
             {
@@ -131,10 +123,7 @@ public class SceneTwoController {
                 {
                     text = new Text( column.getCellData( i ).toString());
                     text.setFont(Font.font(font,fontSize));
-                    System.out.println("hello in autoresize");
-                    System.out.println(text.toString());;
                     double calcWidth = text.getLayoutBounds().getWidth();
-                    System.out.println("Calc width = "+calcWidth);
                     //remember new max-width
                     if ( calcWidth > max )
                     {
@@ -145,16 +134,14 @@ public class SceneTwoController {
             //set the new max-widht with some extra space
             column.setPrefWidth( max + 10.0d );
             maxColumnWidth = max+10.d;
-            columnHeight = text.getLayoutBounds().getHeight();
-
 
         } );
     }
 
     /**************************************************************************************************
      * Create listener for AnchorPanel height and width, so that when the window is resized. The
-     * max Table Height and width changes too.
-     **/
+     * max table height and width changes too.
+     *************************************************************************************************/
 
     public void createListener(){
         InvalidationListener listener = new InvalidationListener(){
@@ -177,14 +164,14 @@ public class SceneTwoController {
         pane.widthProperty().addListener(listener);
         pane.heightProperty().addListener(listener);
     }
-    public void tableHeightHelper(TableView<?> table, int rowHeight, int headerHeight, int margin) {
-        table.prefHeightProperty().bind(Bindings.max(2, Bindings.size(table.getItems()))
-                .multiply(rowHeight)
-                .add(headerHeight)
-                .add(margin));
-        table.minHeightProperty().bind(table.prefHeightProperty());
-        table.maxHeightProperty().bind(table.prefHeightProperty());
+    public void setLabelHeader(){
+        String header= "Output for Input with "+ colNum + " columns";
+
+        label.setText(header);
+        table.setItems(dataList);
     }
+
+
 
 }
 

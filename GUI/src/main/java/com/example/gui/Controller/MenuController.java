@@ -63,7 +63,6 @@ public class MenuController {
                         super.updateItem(item, empty);
                         setFont(Font.font("Consolas", 14));
                         setText(item);
-
                     }
                 };
             }
@@ -72,17 +71,23 @@ public class MenuController {
         table.setItems(list);
         inputs.setSortable(false); /* Disable Column sorting */
 
-        /***********************************************************************
-         * Create a TextInputDialog  to popup and Handle Custom Number of Columns.
-         * ***********************************************************************/
-         td = new TextInputDialog("");
+        createTextID();
+
+    }
+
+    /**********************************************************************************************
+     * Create a TextInputDialog for custom number of columns from user. Attach to Custom button.
+     * Disable okButton from TextInputDialog if user input is illegal in function isValid().
+     * ********************************************************************************************/
+    public void createTextID(){
+        td = new TextInputDialog("");
         td.setHeaderText("Enter the number of columns.");
         inputField = td.getEditor();
 
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-               // td.showAndWait();
+                // td.showAndWait();
                 Button okButton = (Button) td.getDialogPane().lookupButton(ButtonType.OK);
                 BooleanBinding isInvalid = Bindings.createBooleanBinding(()-> !isValid (inputField.getText()), inputField.textProperty());
                 okButton.disableProperty().bind(isInvalid);
@@ -102,20 +107,20 @@ public class MenuController {
         buttonCustom.setOnAction(event);
     }
     @FXML
-    public void clickButtonTwo( ActionEvent event)throws IOException{
+    public void clickButtonTwo()throws IOException{
         ArrayList<String> listForm = model.getListFormat(2);
         ObservableList<Data> observableList = getObservable(listForm);
-        switchScene(2, observableList, event);
+        switchScene(2, observableList);
     }
     @FXML
-    public void clickButtonThree( ActionEvent event) throws IOException{
+    public void clickButtonThree() throws IOException{
         ArrayList<String> listForm = model.getListFormat(3);
         ObservableList<Data> observableList = getObservable(listForm);
-        switchScene(3, observableList, event);
+        switchScene(3, observableList);
     }
 
 
-    public void switchScene(int num,ObservableList<Data> list , ActionEvent event) throws IOException {
+    public void switchScene(int num,ObservableList<Data> list) throws IOException {
          Stage stage;
          Scene scene;
          Parent root;
@@ -142,13 +147,13 @@ public class MenuController {
        return FXCollections.observableArrayList(dataArrayList);
     }
 
-    /**********************************************************************************************
+    /****************************************************************************************************************
      * This function is used validate user input. User can only input a number between (1,Integer Max Value).
      * If user inputs custom value greater than number of items, the max number of columns will default to
      * number of items.
      * @param s = User input for custom number of columns.
      * @return = true if valid request.
-     */
+     ****************************************************************************************************************/
     public boolean isValid(String s){
         if(s.isEmpty()){
             return false;
@@ -166,8 +171,8 @@ public class MenuController {
 
                     }else {
 
-                        int num = Integer.parseInt(s);
-                        numCol = num;
+                        numCol= Integer.parseInt(s);
+
                         if (numCol == 0) {
                             inputField.setText("");
                             return false;
@@ -199,7 +204,7 @@ public class MenuController {
     }
     public void customSwitchEvent(ObservableList<Data> list ) throws IOException {
 
-        switchScene(numCol, list, new ActionEvent());
+        switchScene(numCol, list);
     }
     public void printObservableDataList(ObservableList<Data> observableList){
         observableList.forEach(System.out::println);
