@@ -30,7 +30,7 @@
         <items>
           <Button fx:id="buttonTwo" mnemonicParsing="false" onAction="#clickButtonTwo" prefHeight="25.0" prefWidth="60.0" text="2" />
             <Button fx:id="buttonThree" mnemonicParsing="false" onAction="#clickButtonThree" prefHeight="25.0" prefWidth="60.0" text="3" />
-            <Button fx:id="buttonCustom" mnemonicParsing="false" onAction="#clickButtonCustom" prefHeight="25.0" prefWidth="60.0" text="Custom" />
+            <Button fx:id="buttonCustom" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Custom" />
         </items>
       </ToolBar>
    </children>

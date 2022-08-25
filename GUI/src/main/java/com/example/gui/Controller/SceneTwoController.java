@@ -3,6 +3,7 @@ package com.example.gui.Controller;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -35,10 +37,10 @@ public class SceneTwoController {
     @FXML
     private TableColumn<Data, String> inputs;
     private int colNum;
-    private int numberSpaces;
     private static String font = "Consolas";
     private static int fontSize = 14;
     private static int numItems;
+    private static double columnHeight;
     private static double maxColumnWidth;
     private ObservableList<Data> dataList;
     private Stage stage;
@@ -60,6 +62,7 @@ public class SceneTwoController {
             public TableCell<Data, String> call(TableColumn<Data, String> param) {
 
                 return new TableCell<Data, String>(){
+
                     @Override
                     public void updateItem(String item, boolean empty){
                         //super.updateItem(item, empty);
@@ -80,7 +83,7 @@ public class SceneTwoController {
 
         inputs.setSortable(false); /* Disable Column sorting */
 
-
+         //   inputs.prefWidthProperty().bind(table.widthProperty());
     }
 
     @FXML
@@ -103,14 +106,13 @@ public class SceneTwoController {
         createListener();
         autoResizeColumns(table);
 
-
     }
 
 
     public void setColumnNum(int num ){
         this.colNum = num;
     }
-    public void setNumberSpaces(int num){ this.numberSpaces = num;}
+
     public static void autoResizeColumns( TableView<?> table )
     {
         //Set the right policy
@@ -121,6 +123,7 @@ public class SceneTwoController {
             Text text = new Text( column.getText() );
             double max = text.getLayoutBounds().getWidth();
             System.out.println("max width of text = "+max);
+
             for ( int i = 0; i <= numItems-1; i++ )
             {
                 //cell must not be empty
@@ -142,6 +145,9 @@ public class SceneTwoController {
             //set the new max-widht with some extra space
             column.setPrefWidth( max + 10.0d );
             maxColumnWidth = max+10.d;
+            columnHeight = text.getLayoutBounds().getHeight();
+
+
         } );
     }
 
@@ -154,16 +160,31 @@ public class SceneTwoController {
         InvalidationListener listener = new InvalidationListener(){
             @Override
             public void invalidated(Observable o){
+
                 double paneWN = pane.getWidth();
                 double paneHN = pane.getHeight();
+
                 table.setMaxSize(paneWN-200, paneHN-160);
+
+                if(maxColumnWidth < paneWN-200){
+                    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+                }else{
+                    table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+               }
+
             }
         };
         pane.widthProperty().addListener(listener);
         pane.heightProperty().addListener(listener);
     }
-
-
+    public void tableHeightHelper(TableView<?> table, int rowHeight, int headerHeight, int margin) {
+        table.prefHeightProperty().bind(Bindings.max(2, Bindings.size(table.getItems()))
+                .multiply(rowHeight)
+                .add(headerHeight)
+                .add(margin));
+        table.minHeightProperty().bind(table.prefHeightProperty());
+        table.maxHeightProperty().bind(table.prefHeightProperty());
+    }
 
 }
 

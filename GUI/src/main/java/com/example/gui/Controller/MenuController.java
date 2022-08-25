@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 public class MenuController {
     private int numCol ;
-
+    private int minSize;
     FileModel model;
     TextField inputField;
     TextInputDialog td;
@@ -44,16 +44,13 @@ public class MenuController {
     Button buttonCustom;
     @FXML
     AnchorPane anchorPane;
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
     @FXML
     public void initialize(){
 
         model = new FileModel();
         ArrayList<String> listInit = model.getListInit();
         ObservableList<Data> list = getObservable(listInit);
-
+        minSize = list.size();
         inputs.setCellValueFactory(new PropertyValueFactory<>("inputs"));
 
         inputs.setCellFactory(new Callback<TableColumn<Data, String>, TableCell<Data, String>>() {
@@ -117,12 +114,11 @@ public class MenuController {
         switchScene(3, observableList, event);
     }
 
-    @FXML
-    public void clickButtonCustom( ActionEvent event)throws  IOException{
-
-    }
 
     public void switchScene(int num,ObservableList<Data> list , ActionEvent event) throws IOException {
+         Stage stage;
+         Scene scene;
+         Parent root;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sceneTwo.fxml"));
         root = loader.load();
 
@@ -131,10 +127,6 @@ public class MenuController {
 
         stage = (Stage) anchorPane.getScene().getWindow();
 
-
-        int len =  list.get(0).toString().length();
-
-        controller.setNumberSpaces(len);
         controller.setObservableList(list);
         controller.setColumnNum( num);
         controller.initialize();
@@ -149,23 +141,47 @@ public class MenuController {
         ArrayList<Data> dataArrayList = list.stream().map(Data::new).collect(Collectors.toCollection(ArrayList::new));
        return FXCollections.observableArrayList(dataArrayList);
     }
-    //add no negative number
-    // add no adding more columns than length of observable list
-    // add no add more columns than size of int
+
+    /**********************************************************************************************
+     * This function is used validate user input. User can only input a number between (1,Integer Max Value).
+     * If user inputs custom value greater than number of items, the max number of columns will default to
+     * number of items.
+     * @param s = User input for custom number of columns.
+     * @return = true if valid request.
+     */
     public boolean isValid(String s){
-        System.out.println("in isValid");
-        System.out.println(s);
         if(s.isEmpty()){
-            System.out.println("hello");
             return false;
         }else {
             try {
-                int num = Integer.parseInt(s);
-                numCol = num;
-                System.out.println("numCol = " + numCol);
+                if(s.length() > 10){
+                    setAlertMaxNumber();
+                    return false;
+                }
+                else{
+                    double num2 = Double.parseDouble(s);
+                    if(num2 > Integer.MAX_VALUE) {
+                        setAlertMaxNumber();
+                        return false;
+
+                    }else {
+
+                        int num = Integer.parseInt(s);
+                        numCol = num;
+                        if (numCol == 0) {
+                            inputField.setText("");
+                            return false;
+                        }
+                        if (numCol > minSize) {
+                            numCol = minSize;
+                        }
+                    }
+                }
             } catch (NumberFormatException e) {
                 setAlertLetters();
                 inputField.setText("");
+                return false;
+            }catch (IllegalArgumentException e){
                 return false;
             }
         }
@@ -175,6 +191,11 @@ public class MenuController {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setContentText("Enter Only Numbers");
         a.show();
+    }
+    public void setAlertMaxNumber(){
+        Alert b = new Alert(Alert.AlertType.INFORMATION);
+            b.setContentText("Greater Than Max Number of Columns Entered.");
+            b.show();
     }
     public void customSwitchEvent(ObservableList<Data> list ) throws IOException {
 
