@@ -4,8 +4,16 @@ Run Configuration is  program from com.example.gui.Controller.Main.
 
 ## Summary
 
-So far the program takes the data from the text.txt file and inputs it into a TableColumn (javaFX). The MenuController calls the FileModel. Which uses the File classes to transfer the data into a List. From there the FileModel transfers the list back to the MenuController. Which then transforms the List into an ArrayList<Data> which then transforms  the ArrayList<Data> into cell values. 
+The program takes the data from 'Text.txt' document and displays it at stage one. From there the user can choose what custom column wise to display. The data is shown on stage two. 
 
 ## GUI Screens
+### Stage One
 
-![stageOne](https://user-images.githubusercontent.com/74629827/186024710-29f0e0f5-1466-4589-8ecb-8d05f5adcc02.png)
+![group_project_1](https://user-images.githubusercontent.com/74629827/186944744-0c64d977-d225-4f0e-9dcc-a3118d08dbe0.png)
+
+![group_project_2](https://user-images.githubusercontent.com/74629827/186944753-e8803027-2cd4-4c43-b190-16e7c3f84204.png)
+
+## Stage Two
+
+![group_project_3](https://user-images.githubusercontent.com/74629827/186944760-15e2e0a8-88f7-447c-ad46-324874c6ba09.png)
+
