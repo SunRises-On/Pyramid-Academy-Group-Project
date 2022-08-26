@@ -18,7 +18,9 @@ The program takes the data from 'Text.txt' document and displays it at stage one
 ![group_project_3](https://user-images.githubusercontent.com/74629827/186944760-15e2e0a8-88f7-447c-ad46-324874c6ba09.png)
 
 ### Credits
+
 DrewTodd0628 - File Handling
+
 SunRises-On ( Jewelle Wilson ) - GUI
 
 ### Problem
