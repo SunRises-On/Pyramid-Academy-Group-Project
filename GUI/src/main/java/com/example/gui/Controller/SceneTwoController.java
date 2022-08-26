@@ -23,13 +23,13 @@ public class SceneTwoController {
     @FXML
     private AnchorPane pane;
     @FXML
-    private Button buttonBack;
-    @FXML
     private Label label;
     @FXML
     private TableView<Data> table;
     @FXML
     private TableColumn<Data, String> inputs;
+    @FXML
+    private Button buttonBack;
     private int colNum;
     private static final String font = "Consolas";
     private static final int fontSize = 14;
@@ -41,7 +41,7 @@ public class SceneTwoController {
     public void initialize(){
 
         setLabelHeader();
-
+        buttonBack.setId("buttonBack");
         inputs.setCellValueFactory(new PropertyValueFactory<>("inputs"));
 
         inputs.setCellFactory(new Callback<TableColumn<Data, String>, TableCell<Data, String>>() {
@@ -168,11 +168,14 @@ public class SceneTwoController {
         String header= "Output for Input with "+ colNum + " columns";
 
         label.setText(header);
-        table.setItems(dataList);
     }
 
-
-
+    public Button getButtonBack() {
+        return buttonBack;
+    }
+    public Label getLabel(){
+        return label;
+    }
 }
 
 

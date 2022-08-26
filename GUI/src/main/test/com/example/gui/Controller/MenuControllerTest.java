@@ -19,18 +19,6 @@ import static org.testfx.util.NodeQueryUtils.hasText;
 
 /*****************************************************************************************
  * Tests using TestFX @https://github.com/TestFX/TestFX
- * Had to import this to the pom.xml file besides other TestFX dependencies to solve bug.
- *          <plugin>
- *                 <groupId>org.apache.maven.plugins</groupId>
- *                 <artifactId>maven-surefire-plugin</artifactId>
- *                 <version>2.22.1</version>
- *                 <configuration>
- *                     <argLine>
- *                         --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
- *                     </argLine>
- *                 </configuration>
- *             </plugin>
- * Also had to add "requires javafx.media;" to the module file.
  */
 @ExtendWith(ApplicationExtension.class)
 class MenuControllerTest {
